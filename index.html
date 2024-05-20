@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>React</title>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/babel-standalone@6/babel.min.js"
+        ></script>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script type="text/babel">
+        let items = ["Tomato", "Onion", "Garlic", "Ginger"];
+        const itemsObject = items.map((item, i) => ({
+            id: i,
+            title: item,
+        }));
+
+        function Header(props) {
+            return <h1>{props.name}</h1>;
+        }
+        function Main(props) {
+            return (
+                <section>
+                    <img
+                        height={200}
+                        src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2020/02/Chicken-Fajitas-7.jpg"
+                        alt="dish "
+                    />
+                    <p>Tid den tar å lage den retten {props.tid} </p>
+                    <ul>
+                        {props.items.map((item) => (
+                            <li key={item.id}>{item.title}</li>
+                        ))}
+                    </ul>
+                </section>
+            );
+        }
+        function Footer(props) {
+            return (
+                <div>
+                    <p>Copyrights {props.year} </p>
+                </div>
+            );
+        }
+        function App() {
+            return (
+                <React.Fragment>
+                    <Header name="Fajta" />
+                    <Main tid={30} items={itemsObject} />
+                    <Footer year={new Date().getFullYear()} />
+                </React.Fragment>
+            );
+        }
+        ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+</html>
